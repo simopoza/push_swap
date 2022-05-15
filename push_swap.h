@@ -10,7 +10,8 @@
 typedef struct t_list
 {
     int data;
-    int count;
+    int index;
+    int *arr;
     struct t_list *next;
 } t_list;
 
@@ -33,7 +34,8 @@ void    push_a(t_list **stack_a, t_list **stack_b);
 void    ft_check_sorted(t_list *stack_a);
 bool    is_number(char number[]);
 void    sort_3_num(t_list *stack_a);
-int find_lis(t_list *stack_a);
+int     *find_lis(t_list *stack_a);
+void    ft_finder(t_list *stack_a);
 int main(int ac, char *av[]);
 
 #endif

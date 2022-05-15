@@ -6,7 +6,7 @@
 /*   By: mannahri <mannahri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:09:46 by mannahri          #+#    #+#             */
-/*   Updated: 2022/05/14 12:57:49 by mannahri         ###   ########.fr       */
+/*   Updated: 2022/05/15 13:54:08 by mannahri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,18 @@ int main(int ac, char *av[])
     t_list *stack_b;
     // t_list *tmp;
 
-    if (ac <= 2)
-        exit(1);
+    // if (ac <= 2)
+    //     exit(1);
     stack_a = initial_stack(ac, av);
     stack_b = NULL;
-    ft_check_sorted(stack_a);
-    int i = find_lis(stack_a);
-    printf("lis : %d\n", i);
+    // ft_check_sorted(stack_a);
+    // ft_finder(stack_a);
+    int *k = find_lis(stack_a);
+    int i = 0;
+    while (k[i])
+        printf (">>>>> %d\n", k[i++]);
+    // int i = find_lis(stack_a);
+    // printf("lis : %d\n", i);
     // sort_3_num(stack_a);
     // tmp = stack_a;
     // while (tmp != NULL)
