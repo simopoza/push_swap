@@ -6,38 +6,38 @@
 /*   By: mannahri <mannahri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:09:11 by mannahri          #+#    #+#             */
-/*   Updated: 2022/05/12 15:51:54 by mannahri         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:59:43 by mannahri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h" 
 
-void sort_3_num(t_list *stack_a)
+void sort_3_num(t_list **stack_a)
 {
 	int data;
 
-	data = stack_a->next->next->data;
-	if (stack_a->data > stack_a->next->data && stack_a->next->data < data)
+	data = (*stack_a)->next->next->data;
+	if ((*stack_a)->data > (*stack_a)->next->data && (*stack_a)->next->data < data)
 	{
-		if (stack_a->data < data)
-			sa_sb(&stack_a, "sa\n");
-		if (stack_a->data > data)
-			ra_rb(&stack_a, "ra\n");
+		if ((*stack_a)->data < data)
+			sa_sb(stack_a, "sa\n");
+		if ((*stack_a)->data > data)
+			ra_rb(stack_a, "ra\n");
 	}
-	if (stack_a->data < stack_a->next->data && stack_a->next->data > data)
+	if ((*stack_a)->data < (*stack_a)->next->data && (*stack_a)->next->data > data)
 	{
-		if (stack_a->data < data)
+		if ((*stack_a)->data < data)
 		{
-			sa_sb(&stack_a, "sa\n");
-			ra_rb(&stack_a, "ra\n");
+			sa_sb(stack_a, "sa\n");
+			ra_rb(stack_a, "ra\n");
 		}
-		if (stack_a->data > data)
-			rra_rrb(&stack_a, "rra\n");
+		if ((*stack_a)->data > data)
+			rra_rrb(stack_a, "rra\n");
 	}
-	if (stack_a->data > stack_a->next->data && stack_a->next->data > data)
+	if ((*stack_a)->data > (*stack_a)->next->data && (*stack_a)->next->data > data)
 	{
-		sa_sb(&stack_a, "sa\n");
-		rra_rrb(&stack_a, "rra\n");
+		sa_sb(stack_a, "sa\n");
+		rra_rrb(stack_a, "rra\n");
 	}
 }
 
@@ -55,14 +55,13 @@ void ft_check_sorted(t_list *stack_a)
 
 bool is_number(char num[])
 {
-	int i = 0;
-
-	// checking for negative numbers
+	int i;
+	
+	i = 0;
 	if (num[0] == '-' || num[0] == '+')
 		i = 1;
 	while (num[i] != 0)
 	{
-		// if (num[i] > '9' || num[i] < '0')
 		if (!ft_isdigit(num[i]))
 			return false;
 		i++;

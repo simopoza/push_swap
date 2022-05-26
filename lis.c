@@ -6,7 +6,7 @@
 /*   By: mannahri <mannahri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:49:01 by mannahri          #+#    #+#             */
-/*   Updated: 2022/05/15 16:22:38 by mannahri         ###   ########.fr       */
+/*   Updated: 2022/05/26 11:06:11 by mannahri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,36 +58,6 @@
 //     }
 //     return (ft_max(stack_a));
 // }
-
-int ft_lenght(int *arr)
-{
-    int i = 0;
-    if (arr == NULL)
-        return (0);
-    while (arr[i] != '\0')
-        i++;
-    return (i);
-}
-
-int *ft_strduppp(int *s1)
-{
-    int *str1;
-    int i;
-
-    i = 0;
-    // while (s1[i])
-    //     printf ("arr : %d\n", s1[i++]);
-    str1 = malloc(sizeof(int) * (ft_lenght(s1) + 1));
-    if (!str1)
-        return (NULL);
-    while (s1[i])
-    {
-        str1[i] = s1[i];
-        i++;
-    }
-    str1[i] = '\0';
-    return (str1);
-}
 
 // int *ft_join(int *max, int *arr, int i, int j)
 // {
@@ -148,78 +118,135 @@ int *ft_strduppp(int *s1)
 //     }
 // }
 
-int *ft_join_arr(int *arr, int data)
+// int ft_lenght(int *arr)
+// {
+//     int i = 0;
+//     if (arr == NULL)
+//         return (0);
+//     while (arr[i] != '\0')
+//         i++;
+//     return (i);
+// }
+
+// int *ft_strduppp(int *s1)
+// {
+//     int *str1;
+//     int i;
+
+//     i = 0;
+//     str1 = malloc(sizeof(int) * (ft_lenght(s1) + 1));
+//     if (!str1)
+//         return (NULL);
+//     while (s1[i])
+//     {
+//         str1[i] = s1[i];
+//         i++;
+//     }
+//     str1[i] = '\0';
+//     return (str1);
+// }
+
+// int *ft_join_arr(int *arr, int data)
+// {
+//     int *max;
+//     int len;
+
+//     len = ft_lenght(arr);
+//     if (arr == NULL)
+//     {
+//         max = malloc(sizeof (int) * 2);
+//         if (!max)
+//         {
+//             printf ("Overflow\n");
+//             return (NULL);
+//         }
+//         max[0] = data;
+//         max[1] = 0;
+//         free (arr);
+//         return (max);
+//     }
+//     max = malloc (sizeof (int) * (len + 2));
+//     if (!max)
+//     {
+//         printf("Overflow\n");
+//         return (NULL);
+//     }
+//     len = 0;
+//     while (arr[len])
+//     {
+//         max[len] = arr[len];
+//         len++;
+//     }
+//     max[len] = data;
+//     max[++len] = 0;
+//     len = 0;
+//     free (arr);
+//     return (max);
+// }
+
+s_list *ft_strduppp(s_list *list)
 {
-    int *max;
+    s_list *tmp;
+    s_list *tmp1;
     int len;
 
-    len = ft_lenght(arr);
-    if (arr == NULL)
+    len = count_node1(list);
+    tmp1 = list;
+    tmp = NULL;
+    while (tmp1)
     {
-        max = malloc(sizeof (int) * 2);
-        if (!max)
-        {
-            printf ("Overflow\n");
-            return (NULL);
-        }
-        max[0] = data;
-        max[1] = 0;
-        free (arr);
-        return (max);
+        ft_lstadd_back(&tmp, create_node1(tmp1->data));
+        tmp1 = tmp1->next;
     }
-    max = malloc (sizeof (int) * (len + 2));
-    if (!max)
-    {
-        printf("Overflow\n");
-        return (NULL);
-    }
-    len = 0;
-    while (arr[len])
-    {
-        max[len] = arr[len];
-        len++;
-    }
-    max[len] = data;
-    max[++len] = 0;
-    len = 0;
-    // while (max[len])
-    // {
-    //     printf ("This is max[%d] : %d\n", len, max[len]);
-    //     len++;
-    // }
-    // printf ("\n\n");
-    return (max);
+    return (tmp);
 }
 
-
-int *ft_find_max_arr(t_list *stack_a)
+s_list *ft_join_arr(s_list *list, int data)
 {
-    int *max;
+    if (list == NULL)
+    {
+        list = create_node1(data);
+    }
+    else
+        ft_lstadd_back(&list, create_node1(data));
+
+    return (list);
+}
+s_list *copyList(s_list *head)
+{
+    if (head == NULL)
+        return NULL;
+    else
+    {
+        s_list *newNode = (s_list *)malloc(sizeof(s_list));
+        newNode->data = head->data;
+        newNode->next = copyList(head->next);
+        return newNode;
+    }
+}
+
+s_list *ft_find_max_arr(t_list *stack_a)
+{
     t_list *curr;
     t_list *tmp;
+    s_list *max;
     
     tmp = stack_a;
     curr = stack_a->next;
     while (curr)
     {
-        if (ft_lenght(tmp->arr) < ft_lenght(curr->arr))
+        if (count_node1(tmp->arr) < count_node1(curr->arr))
         {
-            max = ft_strduppp(curr->arr);
+            free (curr->arr);
+            max = copyList(curr->arr);
         }
         tmp = tmp->next;
         curr = curr->next;
     }
-    // int i = 0;
-    // while (max[i])
-    // {
-    //     printf (">>> : %d\n", max[i]);
-    //     i++;
-    // }
     return (max);
 }
 
-
-int *find_lis(t_list *stack_a)
+s_list *find_lis(t_list *stack_a)
 {
     t_list *curr;
     t_list *perv;
@@ -231,38 +258,23 @@ int *find_lis(t_list *stack_a)
         perv = perv->next;
     }
     perv = stack_a;
-    perv->arr = malloc(sizeof (int) * 2);
-    perv->arr[0] = perv->data;
-    perv->arr[1] = 0;
+    perv->arr = create_node1(perv->data);
     curr = stack_a->next;
     while (curr)
     {
         perv = stack_a;
         while (perv != curr)
         {
-            if (curr->data > perv->data && ft_lenght(perv->arr) > ft_lenght(curr->arr))
+            if (curr->data > perv->data && count_node1(perv->arr) > count_node1(curr->arr))
             {
-                free (curr->arr);
+                if(curr->arr)
+                    free(curr->arr);
                 curr->arr = ft_strduppp(perv->arr);
             }
             perv = perv->next;
         }
-        curr->arr = ft_join_arr(curr->arr, curr->data);
+        curr->arr = ft_join_arr(curr->arr, curr->data);  
         curr = curr->next;
     }
-    // curr = stack_a;
-    // while (curr)
-    // {
-    //     int i = 0;
-    //     int h = ft_lenght(curr->arr);
-    //     printf ("This is h : %d\n", h);
-    //     while (curr->arr[i])
-    //     {
-    //         printf ("\nthis is curr->arr[%d] : %d >>>>>> for curr->data : %d\n", i, curr->arr[i], curr->data);
-    //         i++;
-    //         // h--;
-    //     }
-    //     curr = curr->next;
-    // }
     return (ft_find_max_arr(stack_a));
 }

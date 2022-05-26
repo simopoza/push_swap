@@ -6,7 +6,7 @@
 /*   By: mannahri <mannahri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:46:17 by mannahri          #+#    #+#             */
-/*   Updated: 2022/05/10 15:46:33 by mannahri         ###   ########.fr       */
+/*   Updated: 2022/05/25 19:48:09 by mannahri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void sa_sb(t_list **head, char *num_of_stack)
     if ((is_empty(*head) != 0) && (count_node(*head) > 1))
     {
         swap_list(head);
-        ft_putstr_fd(num_of_stack, 0);
+        ft_putstr_fd(num_of_stack, 1);
     }
 }
 
@@ -43,6 +43,6 @@ void ss(t_list **stack_a, t_list **stack_b, char *num_of_stack)
     {
         swap_list(stack_a);
         swap_list(stack_b);
-        ft_putstr_fd(num_of_stack, 0);
+        ft_putstr_fd(num_of_stack, 1);
     }
 }

@@ -6,7 +6,7 @@
 /*   By: mannahri <mannahri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:13:10 by mannahri          #+#    #+#             */
-/*   Updated: 2022/05/13 19:59:03 by mannahri         ###   ########.fr       */
+/*   Updated: 2022/05/16 20:34:57 by mannahri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,34 @@ t_list *add_at_end(t_list *head, int data)
 	return (tmp);
 }
 
-void	add_at_front(t_list **head, int data)
+// void	add_at_front(t_list **head, int data)
+// {
+// 	t_list *tmp;
+
+// 	tmp = create_node(data);
+// 	if ((*head) == NULL)
+// 	{
+// 		(*head) = tmp;
+// 		return ;
+// 	}
+// 	else
+// 	{
+// 		tmp->next = (*head);
+// 		(*head) = tmp;
+// 	}
+// 	int datta = tmp->data;
+// 	while (tmp->next)
+// 	{
+// 		if (datta == tmp->next->data)
+// 		{
+// 			ft_putstr_fd("Error duplication.", 2);
+// 			exit(0);
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// }
+
+void add_at_front(t_list **head, int data)
 {
 	t_list *tmp;
 
@@ -66,23 +93,23 @@ void	add_at_front(t_list **head, int data)
 	if ((*head) == NULL)
 	{
 		(*head) = tmp;
-		return ;
+		return;
 	}
 	else
 	{
 		tmp->next = (*head);
 		(*head) = tmp;
 	}
-	// int datta = tmp->data;
-	// while (tmp->next)
-	// {
-	// 	if (datta == tmp->next->data)
-	// 	{
-	// 		ft_putstr_fd("Error duplication.", 2);
-	// 		exit(0);
-	// 	}
-	// 	tmp = tmp->next;
-	// }
+	int datta = tmp->data;
+	while (tmp->next)
+	{
+		if (datta == tmp->next->data)
+		{
+			ft_putstr_fd("Error duplication.", 2);
+			exit(0);
+		}
+		tmp = tmp->next;
+	}
 }
 
 void add_at_pos(t_list *head, int data, int pos)
